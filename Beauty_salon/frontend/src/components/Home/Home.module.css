@@ -1,0 +1,11 @@
+body {
+  background: url("https://wallpapercave.com/wp/wp9441853.jpg") no-repeat center
+    center fixed;
+}
+
+.divContainer {
+  display: flex;
+  margin-top: 50vh;
+  justify-content: center;
+  column-gap: 10vh;
+}

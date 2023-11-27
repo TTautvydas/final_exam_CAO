@@ -1,6 +1,7 @@
 import axios from "axios";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
+import styles from "../ClientReservation/ClientReservation.module.css";
 
 const clientsEndpoint = "http://localhost:3001/clients";
 
@@ -30,17 +31,21 @@ export default function ClientReservation({ client, setClients }) {
   }
 
   return (
-    <div>
-      <h4>{client.clientName}</h4>
-      <p>{client.clientEmail}</p>
-      <p>
+    <tr className={styles.rowStyle}>
+      <td>{client.clientName}</td>
+      <td>{client.clientEmail}</td>
+      <td>
         {client.registrationDate
           .replace("T", " ")
           .replace("Z", "")
           .slice(0, 16)}
-      </p>
-      <Button buttonName={"Update"} onClick={handleUpdate} />
-      <Button buttonName={"Delete"} onClick={handleDelete} />
-    </div>
+      </td>
+      <td>
+        <Button buttonName={"Update"} onClick={handleUpdate} />
+      </td>
+      <td>
+        <Button buttonName={"Delete"} onClick={handleDelete} />
+      </td>
+    </tr>
   );
 }

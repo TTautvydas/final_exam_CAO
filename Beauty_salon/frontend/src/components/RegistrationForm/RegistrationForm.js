@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
+import styles from "../RegistrationForm/RegistrationForm.module.css";
 
 const clientEndpoint = "http://localhost:3001/clients";
 
@@ -8,6 +10,8 @@ export default function RegistrationForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
+
+  const navigate = useNavigate();
 
   async function createReservation(e) {
     e.preventDefault();
@@ -22,6 +26,7 @@ export default function RegistrationForm() {
       setName("");
       setEmail("");
       setDate("");
+      navigate("/");
     } catch (error) {
       alert("Registration unsuccessful");
       console.log(error);
@@ -29,9 +34,10 @@ export default function RegistrationForm() {
   }
 
   return (
-    <div>
+    <div className={styles.formStyle}>
       <form onSubmit={createReservation}>
         <label htmlFor="name">Name</label>
+        <br></br>
         <input
           type="text"
           id="name"
@@ -40,7 +46,8 @@ export default function RegistrationForm() {
           onChange={(e) => setName(e.target.value)}
           placeholder="e.g. Jane Doe"
         />
-        <label htmlFor="email">Email address</label>
+        <br></br>
+        <label htmlFor="email">Email address</label> <br></br>
         <input
           type="text"
           id="email"
@@ -49,13 +56,16 @@ export default function RegistrationForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="e.g. janedoe@gmail.com"
         />
+        <br></br>
         <label htmlFor="date">Reservation Date</label>
+        <br></br>
         <input
           type="datetime-local"
           value={date}
           required={true}
           onChange={(e) => setDate(e.target.value)}
         />
+        <br></br>
         <Button type="submit" buttonName={"Save Appointment"} />
       </form>
     </div>

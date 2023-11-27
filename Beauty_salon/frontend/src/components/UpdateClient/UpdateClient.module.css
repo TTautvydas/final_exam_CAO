@@ -1,0 +1,26 @@
+.updateContainer > form {
+  margin-top: 10vh;
+  margin-left: 5vw;
+  margin-bottom: 10px;
+}
+
+.updateContainer > form > h2 {
+  color: white;
+  padding-bottom: 4vh;
+}
+
+.updateContainer > form > input {
+  margin-bottom: 30px;
+  margin-top: 1vh;
+  background-color: #333333;
+  color: white;
+  border-radius: 7px;
+}
+
+.updateContainer > form > input:hover {
+  box-shadow: 9px -7px 12px -1px rgba(54, 54, 54, 0.77);
+}
+
+.updateContainer > form > label {
+  color: white;
+}

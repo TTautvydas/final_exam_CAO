@@ -3,6 +3,7 @@ import NavBar from "../NavBar/NavBar";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ClientReservation from "../ClientReservation/ClientReservation";
+import styles from "../Reservations/Reservations.module.css";
 
 const clientsEndpoint = "http://localhost:3001/clients";
 
@@ -17,18 +18,29 @@ export default function Reservations() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <NavBar />
       <main>
-        {clients.map((client) => {
-          return (
-            <ClientReservation
-              setClients={setClients}
-              client={client}
-              key={client._id}
-            />
-          );
-        })}
+        <table className={styles.tableStyle}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Reservation date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {clients.map((client) => {
+              return (
+                <ClientReservation
+                  setClients={setClients}
+                  client={client}
+                  key={client._id}
+                />
+              );
+            })}
+          </tbody>
+        </table>
       </main>
     </div>
   );

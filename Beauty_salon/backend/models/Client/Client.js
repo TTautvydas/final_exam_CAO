@@ -13,7 +13,7 @@ const clientSchema = mongoose.Schema({
     require: true,
   },
   registrationDate: {
-    type: Date,
+    type: String,
   },
 });
 

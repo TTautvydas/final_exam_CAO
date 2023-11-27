@@ -1,0 +1,20 @@
+.formStyle > form {
+  margin-left: 5vw;
+  margin-bottom: 10px;
+}
+
+div > form > label {
+  color: white;
+}
+
+div > form > input {
+  margin-bottom: 30px;
+  margin-top: 1vh;
+  background-color: #333333;
+  color: white;
+  border-radius: 7px;
+}
+
+div > form > input:hover {
+  box-shadow: 9px -7px 12px -1px rgba(54, 54, 54, 0.77);
+}
