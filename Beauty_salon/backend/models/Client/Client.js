@@ -9,11 +9,12 @@ const clientSchema = mongoose.Schema({
   },
   clientEmail: {
     type: String,
-    minLength: 10,
+    minLength: 8,
     require: true,
   },
   registrationDate: {
     type: String,
+    require: true,
   },
 });
 

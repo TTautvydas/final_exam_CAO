@@ -11,7 +11,7 @@ export default function RegisterClient({ open, onClose }) {
   return createPortal(
     <div className={styles.modalContainer}>
       <div className={styles.mainContainer}>
-        <RegistrationForm />
+        <RegistrationForm onClose={onClose} />
       </div>
       <button onClick={onClose}>X</button>
     </div>,

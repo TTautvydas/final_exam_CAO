@@ -1,7 +1,18 @@
 import Client from "../models/Client/Client.js";
 
+let currentDateObj = new Date();
+let currentDate = currentDateObj.toISOString().slice(0, 19);
+
 export async function registerClient(req, res) {
   const { name, email, date } = req.body;
+
+  if (date < currentDate) {
+    return res.status(500).json({ message: "Date must be future date" });
+  }
+
+  if (!name || !email) {
+    return res.status(500).json({ message: "All fields must be filled" });
+  }
 
   console.log(name, email, date);
   try {
@@ -46,6 +57,14 @@ export async function updateClient(req, res) {
   const { name, email, date } = req.body;
 
   try {
+    if (date < currentDate) {
+      return res.status(500).json({ message: "Date must be future date" });
+    }
+
+    if (!name || !email) {
+      return res.status(500).json({ message: "All fields must be filled" });
+    }
+
     const client = await Client.findById(id);
 
     if (!client) {

@@ -24,6 +24,25 @@ export default function UpdateClient() {
 
   async function handleUpdate(e) {
     e.preventDefault();
+
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+    if (name.charAt(0) !== name.charAt(0).toUpperCase()) {
+      return alert("Name should start with capital letter, e.g. 'Jane Doe'");
+    }
+
+    if (specialChars.test(name)) {
+      return alert("Please enter a valid name, e.g. 'Jane Doe'");
+    }
+
+    if (!isNaN(name)) {
+      return alert("Please enter a valid name, e.g. 'Jane Doe'");
+    }
+
+    if (!email.includes("@")) {
+      return alert("Please enter a valid email, e.g. 'client@gmail.com'");
+    }
+
     await axios
       .put(`${clientEndpoint}/${id}`, {
         name,

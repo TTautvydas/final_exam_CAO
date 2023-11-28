@@ -6,18 +6,36 @@ import styles from "../RegistrationForm/RegistrationForm.module.css";
 
 const clientEndpoint = "http://localhost:3001/clients";
 
-export default function RegistrationForm() {
+export default function RegistrationForm({ onClose }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
 
   const navigate = useNavigate();
 
+  const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
   async function createReservation(e) {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post(clientEndpoint, {
+      if (name.charAt(0) !== name.charAt(0).toUpperCase()) {
+        return alert("Name should start with capital letter, e.g. 'Jane Doe'");
+      }
+
+      if (specialChars.test(name)) {
+        return alert("Please enter a valid name, e.g. 'Jane Doe'");
+      }
+
+      if (!isNaN(name)) {
+        return alert("Please enter a valid name, e.g. 'Jane Doe'");
+      }
+
+      if (!email.includes("@")) {
+        return alert("Please enter a valid email, e.g. 'client@gmail.com'");
+      }
+
+      await axios.post(clientEndpoint, {
         name,
         email,
         date,
@@ -26,10 +44,11 @@ export default function RegistrationForm() {
       setName("");
       setEmail("");
       setDate("");
-      navigate("/");
+      onClose();
+      navigate("/clients");
     } catch (error) {
       alert("Registration unsuccessful");
-      console.log(error);
+      console.log(error.message);
     }
   }
 
