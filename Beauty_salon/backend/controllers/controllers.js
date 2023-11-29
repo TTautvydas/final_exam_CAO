@@ -57,6 +57,10 @@ export async function updateClient(req, res) {
   const { name, email, date } = req.body;
 
   try {
+    if (!id) {
+      res.status(500).json({ message: "Client registration not found" });
+    }
+
     if (date < currentDate) {
       return res.status(500).json({ message: "Date must be future date" });
     }
@@ -68,7 +72,7 @@ export async function updateClient(req, res) {
     const client = await Client.findById(id);
 
     if (!client) {
-      res.status(500).json({ message: "Client registration not found" });
+      return res.status(500).json({ message: "Client registration not found" });
     }
 
     client.clientName = name;

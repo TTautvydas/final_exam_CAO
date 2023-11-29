@@ -17,6 +17,10 @@ export default function Reservations() {
       .catch((error) => alert(error.message));
   }, []);
 
+  const sortedClients = clients.sort(
+    (a, b) => new Date(a.registrationDate) - new Date(b.registrationDate)
+  );
+
   return (
     <div className={styles.mainContainer}>
       <NavBar />
@@ -30,7 +34,7 @@ export default function Reservations() {
             </tr>
           </thead>
           <tbody>
-            {clients.map((client) => {
+            {sortedClients.map((client) => {
               return (
                 <ClientReservation
                   setClients={setClients}

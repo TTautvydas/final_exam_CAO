@@ -5,6 +5,7 @@ import Button from "../Button/Button";
 import styles from "../UpdateClient/UpdateClient.module.css";
 
 const clientEndpoint = "http://localhost:3001/clients";
+const currentDate = new Date().toISOString().slice(0, 16);
 
 export default function UpdateClient() {
   const [name, setName] = useState("");
@@ -15,12 +16,18 @@ export default function UpdateClient() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`${clientEndpoint}/${id}`).then(({ data }) => {
-      setName(data.clientName);
-      setEmail(data.clientEmail);
-      setDate(data.registrationDate.replace("Z", "").slice(0, 16));
-    });
-  }, [id]);
+    axios
+      .get(`${clientEndpoint}/${id}`)
+      .then(({ data }) => {
+        setName(data.clientName);
+        setEmail(data.clientEmail);
+        setDate(data.registrationDate.replace("Z", "").slice(0, 16));
+      })
+      .catch((error) => {
+        alert("Client reservation not found!");
+        navigate("/");
+      });
+  }, [id, navigate]);
 
   async function handleUpdate(e) {
     e.preventDefault();
@@ -84,6 +91,7 @@ export default function UpdateClient() {
         <br></br>
         <input
           type="datetime-local"
+          min={currentDate}
           value={date}
           required={true}
           onChange={(e) => setDate(e.target.value)}

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../RegistrationForm/RegistrationForm.module.css";
 
 const clientEndpoint = "http://localhost:3001/clients";
+const currentDate = new Date().toISOString().slice(0, 16);
 
 export default function RegistrationForm({ onClose }) {
   const [name, setName] = useState("");
@@ -45,7 +46,7 @@ export default function RegistrationForm({ onClose }) {
       setEmail("");
       setDate("");
       onClose();
-      navigate("/clients");
+      navigate("/");
     } catch (error) {
       alert("Registration unsuccessful");
       console.log(error.message);
@@ -80,6 +81,7 @@ export default function RegistrationForm({ onClose }) {
         <br></br>
         <input
           type="datetime-local"
+          min={currentDate}
           value={date}
           required={true}
           onChange={(e) => setDate(e.target.value)}
