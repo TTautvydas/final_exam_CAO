@@ -14,7 +14,6 @@ export async function registerClient(req, res) {
     return res.status(500).json({ message: "All fields must be filled" });
   }
 
-  console.log(name, email, date);
   try {
     const client = new Client({
       clientName: name,
@@ -44,7 +43,15 @@ export async function getClientById(req, res) {
   const { id } = req.params;
 
   try {
+    if (!id) {
+      res.status(500).json({ message: "Client registration not found" });
+    }
+
     const client = await Client.findById(id);
+
+    if (!client) {
+      res.status(500).json({ message: "Client registration not found" });
+    }
 
     res.json(client);
   } catch (error) {
